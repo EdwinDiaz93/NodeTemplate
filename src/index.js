@@ -14,5 +14,5 @@ app.use('/api/v1', require('./routes'));
 
 app.listen(process.env.PORT, async () => {
     await Db.sync({ force: true });
-    console.log(`Application running on port: ${process.env.PORT}`);
+    // console.log(`Application running on port: ${process.env.PORT}`);
 });
