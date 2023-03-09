@@ -1,7 +1,8 @@
 const { request, response } = require('express');
+const bcrypt = require('bcryptjs');
+const Db = require('../models');
 const { usuarioData } = require('../data');
 
-const Db = require('../models');
 
 class UsuarioController {
 
@@ -64,11 +65,11 @@ class UsuarioController {
 
             const { email, username, password } = req.body;
 
-            const usuario = { email, username, password };
+            const usuario = { email, username, password: bcrypt.hashSync(password, bcrypt.genSaltSync(10)) };
 
             await Db.model('Usuario').create(usuario);
 
-            return res.status(200).json({
+            return res.status(201).json({
                 ok: true,
                 msg: 'Usuario creado correctamente',
             });
@@ -85,6 +86,7 @@ class UsuarioController {
     static async updateUsuario(req = request, res = response) {
         try {
             const { id } = req.params;
+            const { username, email, password } = req.body;
             const usuarioDb = await Db.model('Usuario').findByPk(id);
             if (!usuarioDb)
                 return res.status(404).json({
@@ -92,7 +94,18 @@ class UsuarioController {
                     msg: `Usuario con id: ${id} no encontrado`,
                 });
 
-                
+            await usuarioDb.update({
+                username,
+                email,
+                password: bcrypt.hashSync(password, bcrypt.genSaltSync(10)),
+            })
+
+            return res.status(200).json({
+                ok: true,
+                msg: `Usuario actualizado correctamente`
+            });
+
+
         } catch (error) {
             console.log(error);
             res.status(500).json({
@@ -124,11 +137,7 @@ class UsuarioController {
         }
     }
 
-    static async seedUsuario(req = request, res = response) {
-        await Db.model('Usuario').destroy({ where: {} });
-        await Db.model('Usuario').bulkCreate(usuarioData);
-        res.send('Seed executed');
-    }
+    
 
 }
 module.exports = UsuarioController;

@@ -3,6 +3,7 @@ const express = require('express');
 const cors = require('cors');
 
 const Db = require('./models');
+const Seeder = require('./seeders');
 
 const app = express();
 
@@ -13,6 +14,10 @@ app.use(express.urlencoded({ extended: true }))
 app.use('/api/v1', require('./routes'));
 
 app.listen(process.env.PORT, async () => {
+
     await Db.sync({ force: true });
+    await Seeder();
+
+
     // console.log(`Application running on port: ${process.env.PORT}`);
 });

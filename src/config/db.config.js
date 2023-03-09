@@ -5,10 +5,11 @@ const Db = new Sequelize(process.env.DB_DATABASE, process.env.DB_USER, process.e
     host: process.env.DB_HOST,
     port: process.env.DB_PORT,
     dialect: process.env.DB_DIALECT,
-    logging: false,
+    loggin: false,
     define: {
         freezeTableName: true,
-        timestamps: false
+        timestamps: false,
+
     }
 });
 

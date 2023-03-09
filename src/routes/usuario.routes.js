@@ -1,7 +1,8 @@
-const { UsuarioController } = require('../controllers');
 const usuarioRouter = require('express').Router();
 const { body } = require('express-validator');
+
 const { validatorRequest } = require('../middlewares');
+const { UsuarioController } = require('../controllers');
 
 
 usuarioRouter.get('/', UsuarioController.getUsuarios);
@@ -53,7 +54,6 @@ usuarioRouter.put('/:id',
     [validatorRequest],
     UsuarioController.updateUsuario);
 
-usuarioRouter.get('/seed', UsuarioController.seedUsuario);
 
 module.exports = usuarioRouter;
 
