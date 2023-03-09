@@ -40,7 +40,15 @@ class UsuarioController {
 
     static async getUsuario(req = request, res = response) {
         try {
+            const { id } = req.params;
+            const usuarioDb = await Db.model('Usuario').findByPk(id);
+            if (!usuarioDb)
+                return res.status(404).json({
+                    ok: false,
+                    msg: `Usuario con id: ${id} no encontrado`,
+                });
 
+            return res.status(200).json(usuarioDb);
         } catch (error) {
             console.log(error);
             res.status(500).json({
@@ -53,8 +61,16 @@ class UsuarioController {
 
     static async saveUsuario(req = request, res = response) {
         try {
+
+            const { email, username, password } = req.body;
+
+            const usuario = { email, username, password };
+
+            await Db.model('Usuario').create(usuario);
+
             return res.status(200).json({
                 ok: true,
+                msg: 'Usuario creado correctamente',
             });
         } catch (error) {
             console.log(error);
@@ -68,7 +84,15 @@ class UsuarioController {
 
     static async updateUsuario(req = request, res = response) {
         try {
+            const { id } = req.params;
+            const usuarioDb = await Db.model('Usuario').findByPk(id);
+            if (!usuarioDb)
+                return res.status(404).json({
+                    ok: false,
+                    msg: `Usuario con id: ${id} no encontrado`,
+                });
 
+                
         } catch (error) {
             console.log(error);
             res.status(500).json({
@@ -81,6 +105,14 @@ class UsuarioController {
 
     static async deleteUsuario(req = request, res = response) {
         try {
+
+            const { id } = req.params;
+            const usuarioDb = await Db.model('Usuario').findByPk(id);
+            if (!usuarioDb)
+                return res.status(404).json({
+                    ok: false,
+                    msg: `Usuario con id: ${id} no encontrado`,
+                });
 
         } catch (error) {
             console.log(error);
