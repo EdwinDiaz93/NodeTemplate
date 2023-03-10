@@ -68,7 +68,7 @@ class UsuarioController {
             const usuario = { email, username, password: bcrypt.hashSync(password, bcrypt.genSaltSync(10)) };
 
             await Db.model('Usuario').create(usuario);
-
+            
             return res.status(201).json({
                 ok: true,
                 msg: 'Usuario creado correctamente',
@@ -127,6 +127,13 @@ class UsuarioController {
                     msg: `Usuario con id: ${id} no encontrado`,
                 });
 
+            await usuarioDb.destroy();
+
+            return res.status(204).json({
+                ok: true,
+                msg: 'Usuario eliminado correctamente',
+            })
+
         } catch (error) {
             console.log(error);
             res.status(500).json({
@@ -137,7 +144,7 @@ class UsuarioController {
         }
     }
 
-    
+
 
 }
 module.exports = UsuarioController;

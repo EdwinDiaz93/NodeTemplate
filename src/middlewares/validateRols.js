@@ -1,8 +1,8 @@
 const { request, response } = require('express');
 
 const validateRoles = (roles) => {
-    return (req = request, res = response, next) => {
-
+    
+    return (req = request, res = response, next) => {        
         if (req.usuario.roles.some(
             rol =>
                 roles.includes(rol.name))

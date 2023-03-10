@@ -37,7 +37,7 @@ usuarioRouter.post('/',
         .withMessage('El campo password es obligatorio')
         .isLength({ min: 3 })
         .withMessage('El campo password debe tener almenos 3 caracteres'),
-    [validateToken, validateRols, validatorRequest],
+    [validateToken, validateRols(['SuperAdmin']), validatorRequest],
     UsuarioController.saveUsuario);
 
 
@@ -60,7 +60,7 @@ usuarioRouter.put('/:id',
         .withMessage('El campo password es obligatorio')
         .isLength({ min: 3 })
         .withMessage('El campo password debe tener almenos 3 caracteres'),
-    [validateToken, validateRols, validatorRequest],
+    [validateToken, validateRols(['SuperAdmin']), validatorRequest],
     UsuarioController.updateUsuario);
 
 

@@ -10,13 +10,9 @@ const validateToken = async (req = request, res = response, next) => {
             msg: 'Token not found',
         });
     }
-    const usuario = await verifyToken(token);
-
+    const usuario = await verifyToken(token);    
     req.usuario = usuario;
-
     next();
-
-
 }
 
 module.exports = validateToken;
