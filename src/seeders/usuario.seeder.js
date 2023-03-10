@@ -3,7 +3,14 @@ const Db = require('../models');
 
 const UsuarioSeeder = async () => {
     await Db.model('Usuario').destroy({ where: {} });
-    await Db.model('Usuario').bulkCreate(usuarioData);
+
+    Db.model('Usuario').bulkCreate(usuarioData).then(
+        (usuarios) => {
+            usuarios.forEach(usuario => (
+                usuario.setRols(Math.ceil(Math.random() * 3))
+            ))
+        }
+    );
 }
 
 module.exports = UsuarioSeeder;

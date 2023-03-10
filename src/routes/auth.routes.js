@@ -1,7 +1,7 @@
 const authRouter = require('express').Router();
 const { body } = require('express-validator')
 const { AuthController } = require('../controllers');
-const {validateToken,validatorRequest} = require('../middlewares');
+const { validateToken, validatorRequest, validateRols } = require('../middlewares');
 
 
 // Login de usuario

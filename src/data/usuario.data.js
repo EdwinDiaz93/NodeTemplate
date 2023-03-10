@@ -2,7 +2,7 @@ const usuarioData = [
     {
         "username": "Westley Gutkowski",
         "email": "Deondre_Luettgen@email.com",
-        "password": "$2a$10$gVs3GSiiqB3KAgl4BtpgruRB5d.ynBXlbY.r6BPuQ90.ho5FO5CwG"
+        "password": "$2a$10$gVs3GSiiqB3KAgl4BtpgruRB5d.ynBXlbY.r6BPuQ90.ho5FO5CwG",        
     },
     {
         "username": "Chad Cartwright",

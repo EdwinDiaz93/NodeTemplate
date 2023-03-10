@@ -20,7 +20,7 @@ const Usuario = Db.define('Usuario', {
         type: DataTypes.STRING,
         allowNull: false,
     },
-});
+},{tableName:'usuarios'});
 
 module.exports = Usuario;
 

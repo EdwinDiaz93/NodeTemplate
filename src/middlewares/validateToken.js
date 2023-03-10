@@ -10,8 +10,6 @@ const validateToken = async (req = request, res = response, next) => {
             msg: 'Token not found',
         });
     }
-
-
     const usuario = await verifyToken(token);
 
     req.usuario = usuario;

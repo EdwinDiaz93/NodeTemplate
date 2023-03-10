@@ -8,7 +8,7 @@ const Db = require('../models');
 class AuthController {
     static async login(req = request, res = response) {
         const { email, password } = req.body;
-        console.log(email);
+
         const usuario = await Db.model('Usuario').findOne({ where: { email } });
 
         if (!usuario)
@@ -20,13 +20,18 @@ class AuthController {
 
         const { id, username, email: usuarioEmail } = usuario;
 
-        const token = await generateToken({ id, username, email: usuarioEmail });
+        const rolesDb = await usuario.getRols();
+
+        // tansformar los roles para solo acceder al nombre del rol
+        const roles = rolesDb ? rolesDb.map(rol => ({ name: rol.name })) : [];
+
+        const token = await generateToken({ id, username, email: usuarioEmail, roles });
 
         return res.status(200).json({
             ok: true,
             id,
             username,
-            email,
+            email,            
             token,
         })
 
