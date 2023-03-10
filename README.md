@@ -6,11 +6,18 @@
 
 2. crear una copia del archivo .env.example, renombrarlo a .env y cambiar las variables
 
+# Reconstruir los paquetes de node
+
+3. Ejecutar el comando 
+```bash
+npm install
+```
+
 # Poblar la base de datos
 
-3. Descomentar la funcion seeder para insertar usuarios
+4. Descomentar la funcion seeder para insertar usuarios
 
-4. ejecutar el comando:
+5. ejecutar el comando:
 
 ```bash
 npm run dev
